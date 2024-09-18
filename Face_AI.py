@@ -1,8 +1,3 @@
-from Trainer import trainer
+from Generator import generator
 
-
-
-t = trainer()
-
-t.train_discriminator()
-
+g = generator()
