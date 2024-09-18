@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>0a5c0e79-04e2-4c08-b760-bb6af8b1e9a0</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Trainer.py</StartupFile>
+    <StartupFile>Prepare_Data.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Face_AI - Copy.py" />
+    <Compile Include="Prepare_Data.py" />
+    <Compile Include="Face_AI.py" />
     <Compile Include="Generator.py" />
     <Compile Include="Discriminator.py" />
     <Compile Include="Trainer.py" />

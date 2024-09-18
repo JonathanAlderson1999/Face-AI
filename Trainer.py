@@ -19,3 +19,7 @@ class trainer:
     def backproagate(self):
 
         return
+
+    def train_discriminator(self):
+
+        return
