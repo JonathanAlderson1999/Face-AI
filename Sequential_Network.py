@@ -30,7 +30,7 @@ class sequential_network:
 
         self.layers.append([[random.random() for i in range(x)] for j in range(y)])
 
-    def conv2D(self):
+    def conv2D(self, stride):
 
         layer = self.layers[-1]
 

@@ -18,10 +18,9 @@ class generator:
         sequential = sequential_network()
 
         sequential.dense(self.x, self.y)
-
-        print(sequential)
-
-        sequential.conv2D()
+        sequential.conv2D(stride = 3)
+        sequential.conv2D(stride = 3)
+        sequential.conv2D(stride = 3)
 
         print(sequential)
 
@@ -29,6 +28,6 @@ class generator:
 
     def generate(self):
         # LOL!
-        return [[random.random() for i in self.x] for j in self.y]
+        return [[random.random() for i in range(self.x)] for j in range(self.y)]
 
 
