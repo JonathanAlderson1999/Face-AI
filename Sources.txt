@@ -1,3 +1,5 @@
 https://www.kaggle.com/datasets/jessicali9530/celeba-dataset?resource=download
 
 https://www.tensorflow.org/tutorials/generative/dcgan
+
+https://www.researchgate.net/profile/Cristina-Pupaza/publication/342641657/figure/fig2/AS:908900312285187@1593710129510/Deep-Learning-Sequential-Neural-Network-with-two-hidden-layers.png
