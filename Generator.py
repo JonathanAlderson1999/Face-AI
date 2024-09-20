@@ -18,15 +18,11 @@ class generator:
 
         sequential = sequential_network()
 
-        self.x = 2
-        self.y = 2
-
         num_input_nodes = self.x * self.y
         num_output_nodes = num_input_nodes
 
         sequential.dense(num_input_nodes, num_output_nodes)
-        sequential.dense(num_input_nodes, num_output_nodes)
-        #sequential.conv2D(stride = 3)
+        sequential.conv2D(stride = 3)
         #sequential.conv2D(stride = 3)
         #sequential.conv2D(stride = 3)
 

@@ -1,12 +1,21 @@
 import random
 import numpy as np
 
+class layer:
+
+    weights    = []
+    biases     = []
+    activation = []
+    dimension  = [0, 0]
+
+class conv2D_layer:
+
+    kernel = []
+
+
 class sequential_network:
 
-    weights = []
-    biases = []
-    activation = []
-    num_layers = 0
+    layers = []
 
     def __init__(self):
 
@@ -15,7 +24,6 @@ class sequential_network:
     def __str__(self):
 
        return "".join([self.format(layer) for layer in self.layers])
-        
 
     def format(self, layer):
 
@@ -34,29 +42,33 @@ class sequential_network:
     def relu(self, x):
         return max(0, x)
 
+    def dense(self, input_x, input_y, output_x, output_y):
 
-    def dense(self, num_input_nodes, num_dense_nodes):
+        num_input_nodes  = input_x  * input_y
+        num_dense_noides = output_x * output_y
 
-        self.weights.append([np.random.rand(num_input_nodes) for j in range(num_dense_nodes)])
-        self.biases.append(np.random.rand(num_dense_nodes))
-        self.num_layers += 1
+        dense_layer = layer()
+        dense_layer.weights   = ([np.random.rand(num_input_nodes) for j in range(num_dense_nodes)])
+        dense_layer.biases    = (np.random.rand(num_dense_nodes))
+        dense_layer.dimension = [output_x, output_y]
+    
+        self.layers.append(dense_layer)
 
     def conv2D(self, stride):
 
-        layer = self.layers[-1]
-
-        x = len(layer[0])
-        y = len(layer)
+        prev_layer = self.layers[-1]
+        prev_x = prev_layer.dimension[0]
+        prev_y = prev_layer.dimension[1]
     
         kernel_size = 3
-        kernel = [[np.random.rand(kernel_size)] for j in range(kernel_size)]
+        kernel = np.random.rand(kernel_size * kernel_size)
 
         stride = 3 
-        new_layer = [np.zeros(x * stride) for j in range(y * stride)]
+        new_layer = np.zeros(x * stride * y * stride)
 
-        for layer_y in range(y):
+        for layer_y in range(prev_x):
 
-            for layer_x in range(x):
+            for layer_x in range(prev_y):
 
                 for kernel_y in range(kernel_size):
 
