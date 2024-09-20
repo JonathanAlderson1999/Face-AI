@@ -5,6 +5,8 @@ class sequential_network:
 
     weights = []
     biases = []
+    activation = []
+    num_layers = 0
 
     def __init__(self):
 
@@ -36,7 +38,8 @@ class sequential_network:
     def dense(self, num_input_nodes, num_dense_nodes):
 
         self.weights.append([np.random.rand(num_input_nodes) for j in range(num_dense_nodes)])
-        self.biases.append([np.random.rand(num_dense_nodes)])
+        self.biases.append(np.random.rand(num_dense_nodes))
+        self.num_layers += 1
 
     def conv2D(self, stride):
 
@@ -68,9 +71,22 @@ class sequential_network:
 
     def feed_forward(self, input):
 
-        i = 0
+        # for each neruon in the 'next' layer
+        #   for each neuron in the 'current' layer
+        #       multiply the neuron by the nth weight of the 'next' neuron
+        #   subract the 'next' neurons bias
+        #   run through relu activation function
 
-        s1 = input[i]
+        activations = input
 
-        print("!")
+        for i in range(self.num_layers):
+
+            weights = self.weights[i]
+            biases  = self.biases[i]
+
+            num_neurons_in_next_layer = len(biases)
+
+            activations = [self.relu((np.sum(input * weights[j]) - biases[j])) for j in range(num_neurons_in_next_layer)]
+
+        return activations
 
