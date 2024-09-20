@@ -1,3 +1,4 @@
+import numpy as np
 
 class trainer:
 
@@ -10,7 +11,7 @@ class trainer:
 
     def distriminator_loss(self):
 
-        return [[random.random() * s for i in self.Generator.x] for j in self.Generator.y]
+        return np.random.rand(self.Generator.x * self.Generator.y)
 
     def generator_loss(self):
 

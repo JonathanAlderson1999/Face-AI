@@ -1,5 +1,6 @@
 import random
 from Sequential_Network import sequential_network
+import numpy as np
 
 class generator:
 
@@ -33,7 +34,7 @@ class generator:
 
     def generate(self):
         
-        noise = [random.random() for i in range(self.x * self.y)]
+        noise = np.random.rand(self.x * self.y)
 
         return self.sequential.feed_forward(noise)        
 

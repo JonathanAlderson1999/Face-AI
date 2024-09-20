@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 class sequential_network:
 
@@ -34,8 +35,8 @@ class sequential_network:
 
     def dense(self, num_input_nodes, num_dense_nodes):
 
-        self.weights.append([[random.random() for i in range(num_input_nodes)] for j in range(num_dense_nodes)])
-        self.biases.append([random.random() for i in range(num_dense_nodes)])
+        self.weights.append([np.random.rand(num_input_nodes) for j in range(num_dense_nodes)])
+        self.biases.append([np.random.rand(num_dense_nodes)])
 
     def conv2D(self, stride):
 
@@ -45,12 +46,10 @@ class sequential_network:
         y = len(layer)
     
         kernel_size = 3
-        kernel = [[random.random() for i in range(kernel_size)] for j in range(kernel_size)]
-
-        kernel = [[1, 1, 1], [2, 2, 2], [3, 3, 3]]
+        kernel = [[np.random.rand(kernel_size)] for j in range(kernel_size)]
 
         stride = 3 
-        new_layer = [[0 for i in range(x * stride)] for j in range(y * stride)]
+        new_layer = [np.zeros(x * stride) for j in range(y * stride)]
 
         for layer_y in range(y):
 
