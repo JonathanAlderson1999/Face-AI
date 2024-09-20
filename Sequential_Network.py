@@ -16,6 +16,7 @@ class sequential_network:
     def format(self, layer):
 
         out = ("Layer: " + str(len(layer[0])) + " : " + str(len(layer)))
+        out += "\n"
 
         for y in layer:
             for x in y:
@@ -25,6 +26,10 @@ class sequential_network:
         out += "\n"
         
         return out
+
+    def relu(self, x):
+        return max(0, x)
+
 
     def dense(self, x, y):
 
@@ -58,6 +63,9 @@ class sequential_network:
 
                         new_layer[y_layer_kernal][x_layer_kernal] = layer[layer_y][layer_x] * kernel[kernel_y][kernel_x]
 
-        return new_layer
+        self.layers.append(new_layer)
 
+    def feed_forward(self, input):
+
+        print("!")
 

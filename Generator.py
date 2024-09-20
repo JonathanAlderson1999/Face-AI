@@ -22,12 +22,12 @@ class generator:
         sequential.conv2D(stride = 3)
         sequential.conv2D(stride = 3)
 
-        print(sequential)
-
-        print(". . .")
+        self.sequential = sequential
 
     def generate(self):
-        # LOL!
-        return [[random.random() for i in range(self.x)] for j in range(self.y)]
+        
+        noise = [[random.random() for i in range(self.x)] for j in range(self.y)] 
+
+        return self.sequential.feed_forward(noise)        
 
 
