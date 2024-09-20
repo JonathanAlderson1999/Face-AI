@@ -2,7 +2,8 @@ import random
 
 class sequential_network:
 
-    layers = []
+    weights = []
+    biases = []
 
     def __init__(self):
 
@@ -31,9 +32,10 @@ class sequential_network:
         return max(0, x)
 
 
-    def dense(self, x, y):
+    def dense(self, num_input_nodes, num_dense_nodes):
 
-        self.layers.append([[random.random() for i in range(x)] for j in range(y)])
+        self.weights.append([[random.random() for i in range(num_input_nodes)] for j in range(num_dense_nodes)])
+        self.biases.append([random.random() for i in range(num_dense_nodes)])
 
     def conv2D(self, stride):
 
@@ -66,6 +68,10 @@ class sequential_network:
         self.layers.append(new_layer)
 
     def feed_forward(self, input):
+
+        i = 0
+
+        s1 = input[i]
 
         print("!")
 

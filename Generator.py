@@ -17,16 +17,23 @@ class generator:
 
         sequential = sequential_network()
 
-        sequential.dense(self.x, self.y)
-        sequential.conv2D(stride = 3)
-        sequential.conv2D(stride = 3)
-        sequential.conv2D(stride = 3)
+        self.x = 2
+        self.y = 2
+
+        num_input_nodes = self.x * self.y
+        num_output_nodes = num_input_nodes
+
+        sequential.dense(num_input_nodes, num_output_nodes)
+        sequential.dense(num_input_nodes, num_output_nodes)
+        #sequential.conv2D(stride = 3)
+        #sequential.conv2D(stride = 3)
+        #sequential.conv2D(stride = 3)
 
         self.sequential = sequential
 
     def generate(self):
         
-        noise = [[random.random() for i in range(self.x)] for j in range(self.y)] 
+        noise = [random.random() for i in range(self.x * self.y)]
 
         return self.sequential.feed_forward(noise)        
 
