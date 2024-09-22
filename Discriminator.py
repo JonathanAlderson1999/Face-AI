@@ -1,17 +1,28 @@
+import random
+from Sequential_Network import sequential_network
 
+class discriminator:
 
-class Discriminator:
+    def __init__(self, dimension):
 
-    def __init__(self, x, y):
+        # TODO: Dropout
+        #       Leaky ReLU
+        #       TanH final answer
 
         sequential = sequential_network()
 
-        sequential.input(x, y)
-        #sequential.conv2D()
+        sequential.input(dimension)
+        sequential.conv2D(num_kernels = 64,  kernel_size = 5, stride = 2)
+        sequential.conv2D(num_kernels = 128, kernel_size = 5, stride = 2)
+        sequential.dense(128, 1, 1, 1)
 
-    def discriminate(image):
+        self.bias = random.random()
+        self.sequential = sequential
 
-        return random.choice(0, 1)
+    def discriminate(self, image):
+        
+        final_layer = self.sequential.feed_forward(image)
 
+        confidence = final_layer.activations[0]
 
-
+        return (condidence > self.bias)

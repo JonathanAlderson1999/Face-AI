@@ -18,11 +18,12 @@ class generator:
 
         # TODO: Batch Normalization
         #       Leaky ReLU
+        #       TanH final answer
 
         sequential = sequential_network()
         sequential.dense(self.x, self.y, self.x, self.y)
-        sequential.conv2DTranspose()
-        sequential.conv2DTranspose()
+        sequential.conv2DTranspose(kernel_size = 3, stride = 3)
+        sequential.conv2DTranspose(kernel_size = 3, stride = 3)
 
         self.sequential = sequential
 
