@@ -42,20 +42,33 @@ class layer:
 
         if (self.type == "dense"):
             weights = self.weights
-            activations = [relu((np.sum(input * weights[j]) - biases[j])) for j in range(num_neurons)]
+            self.activations = [relu((np.sum(input * weights[j]) - biases[j])) for j in range(num_neurons)]
 
         elif (self.type == "conv2D"):
             kernels = self.kernels
 
-            for layer_y in range(dimension[1]):
-                for layer_x in range(dimension[0]):
+            kernel_id = -1
+
+            activations = [np.zeros(dimension[0] * self.stride) for i in range(dimension[1] * self.stride)]
+
+            # TODO: We don't want to be multiplying single elements like a fool
+            # when we could be making use of np's vectorized multiplications.
+            # I'll come back when training is slow.
+
+            for input_y in range(dimension[1]):
+                for input_x in range(dimension[0]):
+
+                    neuron_id = (input_y * dimension[0]) + input_x
+
                     for kernel_x in range(self.kernel_size):
                         for kernel_y in range(self.kernel_size):
 
-                            x_layer_kernal = layer_x * self.stride + kernel_x
-                            y_layer_kernal = layer_y * self.stride + kernel_y
+                            x_layer_kernal = input_x * self.stride + kernel_x
+                            y_layer_kernal = input_y * self.stride + kernel_y
 
-                            new_layer[y_layer_kernal][x_layer_kernal] = layer[layer_y][layer_x] * kernel[kernel_y][kernel_x]
+                            activations[y_layer_kernal][x_layer_kernal] += input[neuron_id] * kernels[neuron_id][(kernel_y * self.kernel_size) + kernel_x]
+
+            self.activations = np.concatenate(activations)
 
 class sequential_network:
 
