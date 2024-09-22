@@ -16,12 +16,13 @@ class generator:
 
     def __init__(self):
 
-        sequential = sequential_network()
+        # TODO: Batch Normalization
+        #       Leaky ReLU
 
+        sequential = sequential_network()
         sequential.dense(self.x, self.y, self.x, self.y)
-        sequential.conv2D()
-        #sequential.conv2D(stride = 3)
-        #sequential.conv2D(stride = 3)
+        sequential.conv2DTranspose()
+        sequential.conv2DTranspose()
 
         self.sequential = sequential
 
@@ -29,6 +30,16 @@ class generator:
         
         noise = np.random.rand(self.x * self.y)
 
-        return self.sequential.feed_forward(noise)        
+        final_layer = self.sequential.feed_forward(noise)
+
+        dim = final_layer.dimension
+
+        activations = final_layer.activations.tolist()
+
+        row = dim[0]
+
+        image = [activations[(row * i) : (row * (i + 1))] for i in range(dim[1])]
+
+        return image
 
 

@@ -16,6 +16,13 @@ class layer:
     stride = 3 
     kernels = []
 
+    def input(self, input_x, input_y):
+        self.type = "input"
+
+        self.weights = []
+        self.biases = []
+        self.dimension = [input_x, input_y]
+
     def dense(self, input_x, input_y, output_x, output_y):
         
         self.type = "dense"
@@ -26,7 +33,7 @@ class layer:
         self.biases = (np.random.rand(num_dense_nodes))
         self.dimension = [output_x, output_y]
 
-    def conv2D(self, prev_layer):
+    def conv2DTranspose(self, prev_layer):
 
         self.type = "conv2D"
         prev_x = prev_layer.dimension[0]
@@ -34,6 +41,7 @@ class layer:
     
         self.kernels = [np.random.rand(self.kernel_size * self.kernel_size) for i in range(prev_x * prev_y)]
         self.biases = np.random.random(prev_x * prev_y)
+        self.dimension = [prev_x * self.stride, prev_y * self.stride]
 
     def feed_forward(self, input, dimension):
 
@@ -42,9 +50,9 @@ class layer:
 
         if (self.type == "dense"):
             weights = self.weights
-            self.activations = [relu((np.sum(input * weights[j]) - biases[j])) for j in range(num_neurons)]
+            self.activations = np.array([relu((np.sum(input * weights[j]) - biases[j])) for j in range(num_neurons)])
 
-        elif (self.type == "conv2D"):
+        elif (self.type == "conv2DTranspose"):
             kernels = self.kernels
 
             kernel_id = -1
@@ -102,11 +110,11 @@ class sequential_network:
         new_layer.dense(input_x, input_y, output_x, output_y)
         self.layers.append(new_layer)
 
-    def conv2D(self):
+    def conv2DTranspose(self):
 
         prev_layer = self.layers[-1]
         new_layer = layer()
-        new_layer.conv2D(prev_layer)
+        new_layer.conv2DTranspose(prev_layer)
         self.layers.append(new_layer)
 
     def feed_forward(self, input):
@@ -127,4 +135,4 @@ class sequential_network:
 
             prev_activations = self.layers[i].activations
 
-        return (self.layers[-1].activations)
+        return (self.layers[-1])

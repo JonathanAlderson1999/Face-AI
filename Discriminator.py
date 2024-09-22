@@ -1,10 +1,13 @@
 
 
-class Generator:
+class Discriminator:
 
-    def __init__():
+    def __init__(self, x, y):
 
-        print(". . .")
+        sequential = sequential_network()
+
+        sequential.input(x, y)
+        #sequential.conv2D()
 
     def discriminate(image):
 
